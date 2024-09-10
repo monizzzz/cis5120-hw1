@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/charts.css/0.9.0/charts.min.css"
+    />
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+        background-color: #5da9e9;
+        color: white;
+        margin: 0;
+        padding: 20px;
+        box-sizing: border-box;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .weather-info-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+      .city {
+        font-size: 56px;
+      }
+
+      .city-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .nav-arrow {
+        margin-left: 10px;
+        font-size: 42px;
+        color: #2b88ef;
+      }
+
+      .temp {
+        font-size: 72px;
+        font-weight: 300;
+        margin-bottom: 10px;
+      }
+
+      .weather-icon {
+        font-size: 64px;
+        margin-left: 10px;
+      }
+
+      .high-low {
+        display: flex;
+        justify-content: center;
+        font-size: 18px;
+        margin-bottom: 20px;
+      }
+
+      .high-low span {
+        margin-right: 15px;
+      }
+
+      .tabs {
+        display: flex;
+        margin-bottom: 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      }
+      .tab {
+        padding: 10px 20px;
+        font-size: 16px;
+      }
+      .tab.active {
+        border-bottom: 3px solid white;
+        font-weight: 500;
+      }
+      .chart {
+        height: 200px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        margin-bottom: 20px;
+        position: relative;
+        overflow: hidden;
+      }
+      .chart-line {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 70%;
+        background-color: #ffa500;
+        clip-path: polygon(
+          0 100%,
+          0 30%,
+          25% 0,
+          50% 20%,
+          75% 0,
+          100% 50%,
+          100% 100%
+        );
+      }
+      .chart-labels {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .chart-container {
+        height: 200px;
+        width: 90%;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        padding: 20px;
+        position: relative;
+      }
+
+      .forecast-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 100px;
+      }
+
+      .ef {
+        font-size: 32px;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .forecast {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 50px;
+      }
+
+      .day {
+        text-align: center;
+      }
+
+      .day-name {
+        font-size: 20px;
+        margin-bottom: 5px;
+      }
+
+      .icon {
+        font-size: 24px;
+        margin: 5px 0;
+      }
+
+      .day-temp {
+        font-size: 18px;
+      }
+
+      #weather-chart {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+        background-color: #e3f2fd;
+        padding: 10px;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="weather-info-container">
+      <div class="city-container">
+        <span class="city">Philadelphia</span>
+        <span class="nav-arrow">▼</span>
+      </div>
+      <div class="temp">77° <span class="weather-icon">☀️</span></div>
+      <div class="high-low">
+        <span>L: 61°</span>
+        <span>H: 80°</span>
+      </div>
+    </div>
+    <div class="tabs">
+      <div class="tab active">Temperature</div>
+      <div class="tab">Precipitation</div>
+      <div class="tab">Wind</div>
+    </div>
+    <div class="chart-container">
+      <div class="chart">
+        <div class="chart-line"></div>
+        <div class="chart-labels">
+          <span>1PM</span>
+          <span>3PM</span>
+          <span>5PM</span>
+          <span>7PM</span>
+        </div>
+      </div>
+    </div>
+    <div class="forecast-container">
+      <div class="ef">Extended Forecast</div>
+      <div class="forecast">
+        <div class="day">
+          <div class="day-name">MON</div>
+          <div class="icon">☀️</div>
+          <div class="day-temp">59°-76°</div>
+        </div>
+        <div class="day">
+          <div class="day-name">TUE</div>
+          <div class="icon">🌧️</div>
+          <div class="day-temp">58°-82°</div>
+        </div>
+        <div class="day">
+          <div class="day-name">WED</div>
+          <div class="icon">☀️</div>
+          <div class="day-temp">58°-83°</div>
+        </div>
+        <div class="day">
+          <div class="day-name">THU</div>
+          <div class="icon">☁️</div>
+          <div class="day-temp">62°-87°</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
